@@ -141,8 +141,10 @@
   }
 </style>
 </head>
+
 <body>
 <main class="page">
+
   <header>
     <span class="mark">☉</span>
     <div class="topline">LOCAL COPY // recovered_09</div>
@@ -153,6 +155,7 @@
   <section id="intro">
     <span class="stamp">FILE 09 / PARTIAL</span>
     <h2>RECOVERED NOTE</h2>
+
     <p>Someone put this here.
 
 I don't know who.
@@ -164,21 +167,27 @@ The book kept referring to things being
 I copied the readable parts below before
 the page disappeared.</p>
 
-    <div class="warning">If you found this by accident, close the page.</div>
+    <div class="warning">
+      If you found this by accident, close the page.
+    </div>
 
     <button onclick="show('p1')">open record</button>
   </section>
 
+
   <section id="p1" class="hidden">
     <span class="stamp">TRANSCRIPTION // 01</span>
     <h2>THE SIX</h2>
+
     <p>These were the words in the book.</p>
+
     <div class="paper">THE
 CORD
 ONE
 THE
 IN
 SIDE</div>
+
     <p>I don't think they're supposed to be read
 in the order they were written.
 
@@ -188,15 +197,19 @@ Try putting it back.</p>
 
     <input id="a1" autocomplete="off" placeholder="...">
     <button onclick="check1()">try</button>
+
     <div id="e1" class="error"></div>
   </section>
+
 
   <section id="p2" class="hidden">
     <span class="stamp">TRANSCRIPTION // 02</span>
     <h2>THE WITNESSES</h2>
+
     <p>There was another page.
 
 I copied it exactly.</p>
+
     <div class="paper">8 entered.
 7 carried the flame.
 6 remembered the name.
@@ -205,38 +218,49 @@ I copied it exactly.</p>
 3 heard the voice.
 2 looked behind them.
 1 was never counted.</div>
+
     <p class="note">I thought the numbers were the important part.
 They aren't.</p>
+
     <input id="a2" autocomplete="off" placeholder="what was never counted?">
     <button onclick="check2()">try</button>
+
     <div id="e2" class="error"></div>
   </section>
+
 
   <section id="p3" class="hidden">
     <span class="stamp">CORRUPTED // 03</span>
     <h2>THE LAST RECORD</h2>
+
     <p>Only three lines survived.
 
 There was writing underneath them.
 I couldn't make it out.
 
 Maybe you can.</p>
+
     <div class="paper">LZJ
 
 AHP
 
 MZWW</div>
+
     <p class="note">The note beside it said:
 
 "the key is where you started."</p>
+
     <input id="a3" autocomplete="off" placeholder="three numbers">
     <button onclick="check3()">try</button>
+
     <div id="e3" class="error"></div>
   </section>
+
 
   <section id="final" class="hidden">
     <span class="stamp">RECOVERY COMPLETE</span>
     <h2>LAST ENTRY</h2>
+
     <p>I finally understand the numbers.
 
 They weren't a password.</p>
@@ -253,49 +277,179 @@ the book with you.
 
 I don't know why.</p>
 
-    <div class="warning">ARCHIVE 09 // RECORDING CONTINUES ELSEWHERE</div>
+    <div class="warning">
+      ARCHIVE 09 // RECORDING CONTINUES ELSEWHERE
+    </div>
   </section>
 
-  <div class="footer">copy date: unknown // source integrity: 71% // some records may be missing</div>
+
+  <div class="footer">
+    copy date: unknown // source integrity: 71% // some records may be missing
+  </div>
+
 </main>
 
+
 <script>
-function $(id){return document.getElementById(id)}
-function show(id){
-  document.querySelectorAll("section").forEach(s=>s.classList.add("hidden"));
-  $(id).classList.remove("hidden");
-  window.scrollTo(0,0);
+
+/* =========================
+   BASIC PAGE FUNCTIONS
+   ========================= */
+
+function $(id){
+  return document.getElementById(id);
 }
+
+function show(id){
+  document.querySelectorAll("section").forEach(s =>
+    s.classList.add("hidden")
+  );
+
+  $(id).classList.remove("hidden");
+
+  window.scrollTo(0, 0);
+}
+
+
+/* =========================
+   NORMALIZE USER INPUT
+   ========================= */
+
 function norm(s){
   return s.toLowerCase()
-    .replace(/[^a-z0-9,\/ -]/g,"")
-    .replace(/\s+/g," ")
+    .replace(/[^a-z0-9,\/ -]/g, "")
+    .replace(/\s+/g, " ")
     .trim();
 }
-function check1(){
-  const v=norm($("a1").value);
-  if(v==="the one inside the cord" || v==="the one inside"){
+
+
+/* =========================
+   SHA-256 HASH FUNCTION
+   ========================= */
+
+async function sha256(str){
+
+  const buf = await crypto.subtle.digest(
+    "SHA-256",
+    new TextEncoder().encode(str)
+  );
+
+  return Array.from(new Uint8Array(buf))
+    .map(b => b.toString(16).padStart(2, "0"))
+    .join("");
+}
+
+
+/* =========================
+   PUZZLE 1
+   ========================= */
+
+async function check1(){
+
+  const v = norm($("a1").value);
+  const hash = await sha256(v);
+
+  // Hashes for:
+  // "the one inside the cord"
+  // "the one inside"
+
+  const validHashes = [
+
+    "e622b781cf267104719bb81062025ed9f335503ddcdbd1dfbb2541db0d12fefc",
+
+    "95c91104e1e3dd2d103ea29e34a6dfdf2d9aa5237ed78be1577dcd2b0d2a8b9e"
+
+  ];
+
+  if(validHashes.includes(hash)){
+
     show("p2");
+
   }else{
-    $("e1").textContent="No. Something is still out of place.";
+
+    $("e1").textContent =
+      "No. Something is still out of place.";
+
   }
 }
-function check2(){
-  const v=norm($("a2").value);
-  if(v==="ninth" || v==="the ninth" || v==="the ninth witness"){
+
+
+/* =========================
+   PUZZLE 2
+   ========================= */
+
+async function check2(){
+
+  const v = norm($("a2").value);
+  const hash = await sha256(v);
+
+  // Hashes for:
+  // "ninth"
+  // "the ninth"
+  // "the ninth witness"
+
+  const validHashes = [
+
+    "357f892fb68f946e917d84871d34e6f4234efd22964a092822ff9b1062c31154",
+
+    "c5e937d589886470fb4a72d4ce5e7b23393961bbecce9df713f019a16f5c5dc0",
+
+    "53d537a4e6727218684724a2592dae4efc3f15d966d6ed9a11dbba80509a2b66"
+
+  ];
+
+  if(validHashes.includes(hash)){
+
     show("p3");
+
   }else{
-    $("e2").textContent="Eight were counted. Look at what wasn't.";
+
+    $("e2").textContent =
+      "Eight were counted. Look at what wasn't.";
+
   }
 }
-function check3(){
-  const v=norm($("a3").value).replace(/\s+/g,"");
-  if(v==="74237-1286" || v==="742,37,-1286" || v==="742/37/-1286"){
+
+
+/* =========================
+   PUZZLE 3
+   ========================= */
+
+async function check3(){
+
+  const v = norm($("a3").value)
+    .replace(/\s+/g, "");
+
+  const hash = await sha256(v);
+
+  // Hashes for:
+  // "74237-1286"
+  // "742,37,-1286"
+  // "742/37/-1286"
+
+  const validHashes = [
+
+    "3d6f125a0a3a78f877fca99bb710376ce93821a812df0f65839b2cf41e6c3fa1",
+
+    "5d1e4ca52a4cd9a96e98b0a996bbef58a23072efd0246a47ce4e46db874ef72d",
+
+    "f29bfdca6b406e1ce021ab50b86aef15fb45a8df2d854ce6fa2aa8f921bcbc12"
+
+  ];
+
+  if(validHashes.includes(hash)){
+
     show("final");
+
   }else{
-    $("e3").textContent="Three lines. Three numbers. Try again.";
+
+    $("e3").textContent =
+      "Three lines. Three numbers. Try again.";
+
   }
 }
+
 </script>
+
 </body>
 </html>
