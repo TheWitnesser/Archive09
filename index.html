@@ -1,319 +1,11 @@
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>archive_09</title>
-<style>
-  *{box-sizing:border-box}
-  html{background:#101010}
-  body{
-    margin:0;
-    min-height:100vh;
-    background:
-      radial-gradient(circle at 50% 10%,rgba(255,255,255,.025),transparent 35%),
-      repeating-linear-gradient(0deg,rgba(255,255,255,.012) 0,rgba(255,255,255,.012) 1px,transparent 1px,transparent 4px),
-      #101010;
-    color:#bcb9b2;
-    font-family:"Courier New",Courier,monospace;
-    padding:34px 18px;
-  }
-  .page{
-    width:min(760px,100%);
-    margin:auto;
-    border:1px solid #353535;
-    background:#121212;
-    box-shadow:7px 7px 0 rgba(0,0,0,.35);
-    padding:22px 24px 30px;
-    position:relative;
-  }
-  .page:before{
-    content:"";
-    position:absolute;
-    left:0;top:0;right:0;height:3px;
-    background:#292929;
-  }
-  header{
-    border-bottom:1px dashed #3b3b3b;
-    padding-bottom:14px;
-    margin-bottom:22px;
-  }
-  .topline{font-size:11px;color:#666;letter-spacing:.08em}
-  h1{
-    font-size:25px;
-    font-weight:normal;
-    letter-spacing:.08em;
-    margin:10px 0 3px;
-  }
-  .subtitle{font-size:11px;color:#777}
-  .mark{
-    float:right;
-    font-size:28px;
-    color:#777;
-    margin-top:-4px;
-  }
-  h2{
-    font-size:13px;
-    font-weight:normal;
-    color:#89857e;
-    margin:0 0 18px;
-    letter-spacing:.05em;
-  }
-  p{
-    white-space:pre-line;
-    line-height:1.75;
-    font-size:14px;
-    max-width:650px;
-  }
-  .note{
-    color:#777;
-    font-size:11px;
-    line-height:1.7;
-    margin-top:22px;
-  }
-  .paper{
-    border:1px solid #2f2f2f;
-    background:#0e0e0e;
-    padding:15px 17px;
-    margin:17px 0;
-    color:#aaa;
-    white-space:pre-wrap;
-    line-height:1.8;
-    font-size:13px;
-  }
-  .stamp{
-    display:inline-block;
-    border:1px solid #484848;
-    color:#777;
-    padding:3px 6px;
-    font-size:10px;
-    transform:rotate(-1deg);
-    margin-bottom:16px;
-  }
-  input{
-    display:block;
-    width:100%;
-    max-width:620px;
-    margin:12px 0 8px;
-    padding:11px 10px;
-    background:#0b0b0b;
-    border:1px solid #414141;
-    outline:none;
-    color:#d0cdc6;
-    font:13px "Courier New",monospace;
-  }
-  input:focus{border-color:#696969}
-  button{
-    background:#171717;
-    border:1px solid #464646;
-    color:#aaa;
-    font:12px "Courier New",monospace;
-    padding:9px 13px;
-    cursor:pointer;
-  }
-  button:hover{background:#202020;color:#ddd}
-  .error{min-height:18px;color:#756363;font-size:11px;margin-top:9px}
-  .hidden{display:none}
-  .warning{
-    margin:20px 0;
-    padding:11px 13px;
-    border-left:2px solid #555;
-    color:#89847c;
-    font-size:11px;
-    line-height:1.7;
-  }
-  .final-coords{
-    font-size:18px;
-    line-height:2;
-    letter-spacing:.08em;
-  }
-  .footer{
-    border-top:1px dashed #333;
-    margin-top:30px;
-    padding-top:12px;
-    color:#555;
-    font-size:10px;
-  }
-  .flicker{animation:flicker 8s infinite}
-  @keyframes flicker{
-    0%,94%,96%,100%{opacity:1}
-    95%{opacity:.55}
-  }
-</style>
-</head>
-
-<body>
-<main class="page">
-
-  <header>
-    <span class="mark">☉</span>
-    <div class="topline">LOCAL COPY // recovered_09</div>
-    <h1 class="flicker">archive_09</h1>
-    <div class="subtitle">there is no official copy of this record.</div>
-  </header>
-
-  <section id="intro">
-    <span class="stamp">FILE 09 / PARTIAL</span>
-    <h2>RECOVERED NOTE</h2>
-
-    <p>Someone put this here.
-
-I don't know who.
-
-The first file was found with a book.
-The book kept referring to things being
-"out of order."
-
-I copied the readable parts below before
-the page disappeared.</p>
-
-    <div class="warning">
-      If you found this by accident, close the page.
-    </div>
-
-    <button onclick="show('p1')">open record</button>
-  </section>
-
-
-  <section id="p1" class="hidden">
-    <span class="stamp">TRANSCRIPTION // 01</span>
-    <h2>THE SIX</h2>
-
-    <p>These were the words in the book.</p>
-
-    <div class="paper">THE
-CORD
-ONE
-THE
-IN
-SIDE</div>
-
-    <p>I don't think they're supposed to be read
-in the order they were written.
-
-There is a sentence hiding in them.
-
-Try putting it back.</p>
-
-    <input id="a1" autocomplete="off" placeholder="...">
-    <button onclick="check1()">try</button>
-
-    <div id="e1" class="error"></div>
-  </section>
-
-
-  <section id="p2" class="hidden">
-    <span class="stamp">TRANSCRIPTION // 02</span>
-    <h2>THE WITNESSES</h2>
-
-    <p>There was another page.
-
-I copied it exactly.</p>
-
-    <div class="paper">8 entered.
-7 carried the flame.
-6 remembered the name.
-5 refused to speak.
-4 remained at the door.
-3 heard the voice.
-2 looked behind them.
-1 was never counted.</div>
-
-    <p class="note">I thought the numbers were the important part.
-They aren't.</p>
-
-    <input id="a2" autocomplete="off" placeholder="what was never counted?">
-    <button onclick="check2()">try</button>
-
-    <div id="e2" class="error"></div>
-  </section>
-
-
-  <section id="p3" class="hidden">
-    <span class="stamp">CORRUPTED // 03</span>
-    <h2>THE LAST RECORD</h2>
-
-    <p>Only three lines survived.
-
-There was writing underneath them.
-I couldn't make it out.
-
-Maybe you can.</p>
-
-    <div class="paper">LZJ
-
-AHP
-
-MZWW</div>
-
-    <p class="note">The note beside it said:
-
-"the key is where you started."</p>
-
-    <input id="a3" autocomplete="off" placeholder="three numbers">
-    <button onclick="check3()">try</button>
-
-    <div id="e3" class="error"></div>
-  </section>
-
-
-  <section id="final" class="hidden">
-    <span class="stamp">RECOVERY COMPLETE</span>
-    <h2>LAST ENTRY</h2>
-
-    <p>I finally understand the numbers.
-
-They weren't a password.</p>
-
-    <div class="paper final-coords">742
-37
--1286</div>
-
-    <p>The original note called this place
-"the first door."
-
-If you're going there, don't bring
-the book with you.
-
-I don't know why.</p>
-
-    <div class="warning">
-      ARCHIVE 09 // RECORDING CONTINUES ELSEWHERE
-    </div>
-  </section>
-
-
-  <div class="footer">
-    copy date: unknown // source integrity: 71% // some records may be missing
-  </div>
-
-</main>
-
-
 <script>
-
-/* =========================
-   BASIC PAGE FUNCTIONS
-   ========================= */
-
-function $(id){
-  return document.getElementById(id);
-}
+function $(id){ return document.getElementById(id); }
 
 function show(id){
-  document.querySelectorAll("section").forEach(s =>
-    s.classList.add("hidden")
-  );
-
+  document.querySelectorAll("section").forEach(s => s.classList.add("hidden"));
   $(id).classList.remove("hidden");
-
   window.scrollTo(0, 0);
 }
-
-
-/* =========================
-   NORMALIZE USER INPUT
-   ========================= */
 
 function norm(s){
   return s.toLowerCase()
@@ -322,64 +14,38 @@ function norm(s){
     .trim();
 }
 
-
-/* =========================
-   SHA-256 HASH FUNCTION
-   ========================= */
-
-async function sha256(str){
-
+// Utility function to compute SHA-256 string hash using standard Web Crypto API
+async function sha256(str) {
   const buf = await crypto.subtle.digest(
     "SHA-256",
     new TextEncoder().encode(str)
   );
 
   return Array.from(new Uint8Array(buf))
-    .map(b => b.toString(16).padStart(2, "0"))
-    .join("");
+    .map(b => b.toString(16).padStart(2, '0'))
+    .join('');
 }
 
-
-/* =========================
-   PUZZLE 1
-   ========================= */
-
 async function check1(){
-
   const v = norm($("a1").value);
   const hash = await sha256(v);
 
   // Hashes for:
   // "the one inside the cord"
   // "the one inside"
-
   const validHashes = [
-
     "e622b781cf267104719bb81062025ed9f335503ddcdbd1dfbb2541db0d12fefc",
-
     "95c91104e1e3dd2d103ea29e34a6dfdf2d9aa5237ed78be1577dcd2b0d2a8b9e"
-
   ];
 
-  if(validHashes.includes(hash)){
-
+  if (validHashes.includes(hash)) {
     show("p2");
-
-  }else{
-
-    $("e1").textContent =
-      "No. Something is still out of place.";
-
+  } else {
+    $("e1").textContent = "No. Something is still out of place.";
   }
 }
 
-
-/* =========================
-   PUZZLE 2
-   ========================= */
-
 async function check2(){
-
   const v = norm($("a2").value);
   const hash = await sha256(v);
 
@@ -387,69 +53,37 @@ async function check2(){
   // "ninth"
   // "the ninth"
   // "the ninth witness"
-
   const validHashes = [
-
     "357f892fb68f946e917d84871d34e6f4234efd22964a092822ff9b1062c31154",
-
     "c5e937d589886470fb4a72d4ce5e7b23393961bbecce9df713f019a16f5c5dc0",
-
     "53d537a4e6727218684724a2592dae4efc3f15d966d6ed9a11dbba80509a2b66"
-
   ];
 
-  if(validHashes.includes(hash)){
-
+  if (validHashes.includes(hash)) {
     show("p3");
-
-  }else{
-
-    $("e2").textContent =
-      "Eight were counted. Look at what wasn't.";
-
+  } else {
+    $("e2").textContent = "Eight were counted. Look at what wasn't.";
   }
 }
 
-
-/* =========================
-   PUZZLE 3
-   ========================= */
-
 async function check3(){
-
-  const v = norm($("a3").value)
-    .replace(/\s+/g, "");
-
+  const v = norm($("a3").value).replace(/\s+/g, "");
   const hash = await sha256(v);
 
   // Hashes for:
   // "74237-1286"
   // "742,37,-1286"
   // "742/37/-1286"
-
   const validHashes = [
-
     "3d6f125a0a3a78f877fca99bb710376ce93821a812df0f65839b2cf41e6c3fa1",
-
     "5d1e4ca52a4cd9a96e98b0a996bbef58a23072efd0246a47ce4e46db874ef72d",
-
     "f29bfdca6b406e1ce021ab50b86aef15fb45a8df2d854ce6fa2aa8f921bcbc12"
-
   ];
 
-  if(validHashes.includes(hash)){
-
+  if (validHashes.includes(hash)) {
     show("final");
-
-  }else{
-
-    $("e3").textContent =
-      "Three lines. Three numbers. Try again.";
-
+  } else {
+    $("e3").textContent = "Three lines. Three numbers. Try again.";
   }
 }
-
 </script>
-
-</body>
-</html>
