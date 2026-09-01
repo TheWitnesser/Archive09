@@ -17,7 +17,7 @@ function show(id) {
 }
 
 
-/* Clean up player input */
+/* Normalize player input */
 function normalize(text) {
   return text
     .toLowerCase()
@@ -27,7 +27,7 @@ function normalize(text) {
 }
 
 
-/* Convert answer into a SHA-256 hash */
+/* SHA-256 */
 async function hash(text) {
   const data = new TextEncoder().encode(text);
   const result = await crypto.subtle.digest("SHA-256", data);
@@ -39,37 +39,9 @@ async function hash(text) {
 
 
 /*
-    LOCAL COPY // recovered_09
-
-    there is no official copy of this record.
-
-    TRANSCRIPTION // 01
-
-    THE SIX
-
-    These were the words found in the book.
-
-    THE CORD
-    ONE
-    THE
-    IN
-    SIDE
-
-    They were written like this.
-
-    I don't think they were meant to stay that way.
-
-    The order feels wrong.
-
-    Something about the spaces between them—
-
-    [record ends]
-
-    copy date: unknown
-    source integrity: 71%
-    some records may be missing
+    RECOVERED RECORDS
+    source integrity: partial
 */
-
 
 const records = {
 
@@ -86,20 +58,21 @@ const records = {
 
   final: [
     "a711232c3825269143fe0cc1f9d1455bad00ed331e53319b3aab9d12d0ae456d",
-    "4fc7807217e68b0b8bbf6f7a41ee0d2f9c7e4b1b8539e226172ae92bb00f9aed",
-    "207ff8ff23c6df7080d5d52fde8bf4b57ae324b5295d4aad6f2350691c94097d"
+    "207ff8ff23c6df7080d5d52fde8bf4b57ae324b5295d4aad6f2350691c94097d",
+    "4fc7807217e68b0b8bbf6f7a41ee0d2f9c7e4b1b8539e226172ae92bb00f9aed"
   ]
 
 };
 
 
-/* Check an answer */
+/* Verify answer */
+
 async function checkAnswer(input, record) {
 
-  const answer = normalize(input);
-  const answerHash = await hash(answer);
+  const value = normalize(input);
+  const valueHash = await hash(value);
 
-  return records[record].includes(answerHash);
+  return records[record].includes(valueHash);
 }
 
 
@@ -145,7 +118,8 @@ async function check2() {
 
 async function check3() {
 
-  const input = $("a3").value.replace(/\s+/g, "");
+  const input = $("a3").value
+    .replace(/\s+/g, "");
 
   if (await checkAnswer(input, "final")) {
 
@@ -162,11 +136,9 @@ async function check3() {
 
 /* ARCHIVE STATUS */
 
-(function archiveCheck() {
+(function () {
 
-  const totalRecords = Object.keys(records).length;
-
-  if (totalRecords === 0) {
+  if (Object.keys(records).length === 0) {
     document.body.dataset.archive = "empty";
   }
 
