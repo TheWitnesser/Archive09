@@ -174,6 +174,15 @@ button:hover {
     letter-spacing: 1px;
 }
 
+.final-location {
+    font-size: 18px;
+    letter-spacing: 3px;
+    color: #aaa;
+    border: 1px solid #303030;
+    padding: 20px;
+    margin: 30px 0;
+}
+
 @media (max-width: 600px) {
     body {
         padding: 20px 8px;
@@ -461,9 +470,13 @@ PAGE 17
     </p>
 
     <div class="fragment">
-        <span>LZU</span>
-        <span>AHP</span>
-        <span>MZWW</span>
+
+        <span>LLZSAJWHJBZS</span>
+
+        <span>MOVSRWMIWV</span>
+
+        <span>HUIHJSMVYPWWBE</span>
+
     </div>
 
     <p class="note">
@@ -472,6 +485,10 @@ PAGE 17
 
     <p>
         "the key is where you started."
+    </p>
+
+    <p class="dim">
+        [some letters may have been copied incorrectly]
     </p>
 
     <div class="end">
@@ -526,6 +543,14 @@ PAGE 17
     </div>
 
     <p>
+        Something else was written underneath.
+    </p>
+
+    <div class="final-location">
+        74237-1286
+    </div>
+
+    <p class="dim">
         [end of recovered material]
     </p>
 
@@ -590,68 +615,33 @@ async function sha256(str){
 }
 
 
-const fragments = [
+/*
+    The answers are stored as hashes instead of
+    plain text so they aren't immediately visible
+    when someone inspects the page.
+*/
 
-    "91f6c6c5b8a9f5e7d1c4b3a2e8f7c6d5b4a3928172635445566778899aabbccdd",
+const answerHashes = {
 
-    "3fd424a72af0a4b47673f78a1b2c94f99eae709bf5625b036ab8f9cb8c2dc821",
+    record1:
+        "3fd424a72af0a4b47673f78a1b2c94f99eae709bf5625b036ab8f9cb8c2dc821",
 
-    "4f8e2c9a17b6d5e4c3a291807f6e5d4c3b2a1908172635445566778899aabbcc",
+    record2:
+        "8356b43f84d485037060c3fe4786f41d4b4b241278b8645bcce36753a8acfb46",
 
-    "8356b43f84d485037060c3fe4786f41d4b4b241278b8645bcce36753a8acfb46",
-
-    "35fb900176c8de8f0d69fd648c4b27d2798e37dd41d448fdb8efd1bd77ad9d8b",
-
-    "7c1e4a9b2d8f6c5e3b1a908172635445566778899aabbccddeeff001122334455",
-
-    "401b4f982907a83104502c89e3ca1d1ea333f5f7ac7676f24ea1e0d023d62e2e",
-
-    "a9d7c4e2f1b0837465d4c3b2a1908172635445566778899aabbccddeeff0011",
-
-    "a711232c3825269143fe0cc1f9d1455bad00ed331e53319b3aab9d12d0ae456d",
-
-    "4fc7807217e68b0b8bbf6f7a41ee0d2f9c7e4b1b8539e226172ae92bb00f9aed",
-
-    "d4b8e1c7a2f9038567d4c3b2a1908172635445566778899aabbccddeeff0011",
-
-    "2ed280d84ad145eddf613e7ee456006b2db75fe530af93c8de30ddc594cd56dd",
-
-    "207ff8ff23c6df7080d5d52fde8bf4b57ae324b5295d4aad6f2350691c94097d",
-
-    "2a7c9e4f1d8b60357483920172635445566778899aabbccddeeff0011223344"
-
-];
-
-
-const routes = {
-
-    a: [1, 4],
-
-    b: [3, 6, 11],
-
-    c: [8, 9, 12]
+    record3:
+        "a711232c3825269143fe0cc1f9d1455bad00ed331e53319b3aab9d12d0ae456d"
 
 };
-
-
-async function verify(value, route){
-
-    const hash = await sha256(value);
-
-    return routes[route].some(function(index){
-
-        return fragments[index] === hash;
-
-    });
-
-}
 
 
 async function check1(){
 
     const value = norm($("a1").value);
 
-    if(await verify(value, "a")){
+    const hash = await sha256(value);
+
+    if(hash === answerHashes.record1){
 
         show("p2");
 
@@ -668,10 +658,9 @@ async function check2(){
 
     const value = norm($("a2").value);
 
-    if(
-        value === "the ninth witness" ||
-        await verify(value, "b")
-    ){
+    const hash = await sha256(value);
+
+    if(hash === answerHashes.record2){
 
         show("p3");
 
@@ -689,7 +678,9 @@ async function check3(){
     const value = norm($("a3").value)
         .replace(/\s+/g, "");
 
-    if(await verify(value, "c")){
+    const hash = await sha256(value);
+
+    if(hash === answerHashes.record3){
 
         show("final");
 
@@ -704,11 +695,16 @@ async function check3(){
 
 (function(){
 
-    const recordCount = fragments.length;
+    const archiveState = {
 
-    if(recordCount === 0){
+        records: 3,
+        integrity: "unknown"
 
-        document.body.dataset.archive = "empty";
+    };
+
+    if(archiveState.records !== 3){
+
+        document.body.dataset.archive = "corrupted";
 
     }
 
