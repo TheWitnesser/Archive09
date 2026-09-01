@@ -27,7 +27,7 @@ function normalize(text) {
 }
 
 
-/* Convert an answer into a SHA-256 hash */
+/* Convert answer into a SHA-256 hash */
 async function hash(text) {
   const data = new TextEncoder().encode(text);
   const result = await crypto.subtle.digest("SHA-256", data);
@@ -39,11 +39,37 @@ async function hash(text) {
 
 
 /*
-    ARCHIVE RECOVERY
+    LOCAL COPY // recovered_09
 
-    The original answers are not stored as readable text.
-    Only their hashes are kept here.
+    there is no official copy of this record.
+
+    TRANSCRIPTION // 01
+
+    THE SIX
+
+    These were the words found in the book.
+
+    THE CORD
+    ONE
+    THE
+    IN
+    SIDE
+
+    They were written like this.
+
+    I don't think they were meant to stay that way.
+
+    The order feels wrong.
+
+    Something about the spaces between them—
+
+    [record ends]
+
+    copy date: unknown
+    source integrity: 71%
+    some records may be missing
 */
+
 
 const records = {
 
@@ -67,7 +93,7 @@ const records = {
 };
 
 
-/* Check an answer against a record */
+/* Check an answer */
 async function checkAnswer(input, record) {
 
   const answer = normalize(input);
@@ -90,7 +116,7 @@ async function check1() {
   } else {
 
     $("e1").textContent =
-      "No. The pieces are still out of order.";
+      "No. The order still feels wrong.";
 
   }
 }
@@ -138,8 +164,7 @@ async function check3() {
 
 (function archiveCheck() {
 
-  const totalRecords =
-    Object.keys(records).length;
+  const totalRecords = Object.keys(records).length;
 
   if (totalRecords === 0) {
     document.body.dataset.archive = "empty";
