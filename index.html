@@ -1,174 +1,147 @@
 <script>
-function $(id){
+function $(id) {
   return document.getElementById(id);
 }
 
-function show(id){
-  document.querySelectorAll("section").forEach(s => {
-    s.classList.add("hidden");
+function show(id) {
+  document.querySelectorAll("section").forEach(section => {
+    section.classList.add("hidden");
   });
 
-  $(id).classList.remove("hidden");
-  window.scrollTo(0, 0);
+  const target = $(id);
+
+  if (target) {
+    target.classList.remove("hidden");
+    window.scrollTo(0, 0);
+  }
 }
 
-function norm(s){
-  return s.toLowerCase()
+
+/* Clean up player input */
+function normalize(text) {
+  return text
+    .toLowerCase()
     .replace(/[^a-z0-9,\/ -]/g, "")
     .replace(/\s+/g, " ")
     .trim();
 }
 
-async function sha256(str){
-  const buffer = await crypto.subtle.digest(
-    "SHA-256",
-    new TextEncoder().encode(str)
-  );
 
-  return Array.from(new Uint8Array(buffer))
-    .map(b => b.toString(16).padStart(2, "0"))
+/* Convert an answer into a SHA-256 hash */
+async function hash(text) {
+  const data = new TextEncoder().encode(text);
+  const result = await crypto.subtle.digest("SHA-256", data);
+
+  return Array.from(new Uint8Array(result))
+    .map(byte => byte.toString(16).padStart(2, "0"))
     .join("");
 }
 
 
 /*
-   recovered data
-   some fragments are incomplete
+    ARCHIVE RECOVERY
+
+    The original answers are not stored as readable text.
+    Only their hashes are kept here.
 */
 
-const fragments = [
+const records = {
 
-  /* 00 */
-  "91f6c6c5b8a9f5e7d1c4b3a2e8f7c6d5b4a3928172635445566778899aabbccdd",
+  first: [
+    "3fd424a72af0a4b47673f78a1b2c94f99eae709bf5625b036ab8f9cb8c2dc821",
+    "35fb900176c8de8f0d69fd648c4b27d2798e37dd41d448fdb8efd1bd77ad9d8b"
+  ],
 
-  /* 01 */
-  "3fd424a72af0a4b47673f78a1b2c94f99eae709bf5625b036ab8f9cb8c2dc821",
+  second: [
+    "8356b43f84d485037060c3fe4786f41d4b4b241278b8645bcce36753a8acfb46",
+    "401b4f982907a83104502c89e3ca1d1ea333f5f7ac7676f24ea1e0d023d62e2e",
+    "2ed280d84ad145eddf613e7ee456006b2db75fe530af93c8de30ddc594cd56dd"
+  ],
 
-  /* 02 */
-  "4f8e2c9a17b6d5e4c3a291807f6e5d4c3b2a1908172635445566778899aabbcc",
+  final: [
+    "a711232c3825269143fe0cc1f9d1455bad00ed331e53319b3aab9d12d0ae456d",
+    "4fc7807217e68b0b8bbf6f7a41ee0d2f9c7e4b1b8539e226172ae92bb00f9aed",
+    "207ff8ff23c6df7080d5d52fde8bf4b57ae324b5295d4aad6f2350691c94097d"
+  ]
 
-  /* 03 */
-  "8356b43f84d485037060c3fe4786f41d4b4b241278b8645bcce36753a8acfb46",
-
-  /* 04 */
-  "35fb900176c8de8f0d69fd648c4b27d2798e37dd41d448fdb8efd1bd77ad9d8b",
-
-  /* 05 */
-  "7c1e4a9b2d8f6c5e3b1a908172635445566778899aabbccddeeff001122334455",
-
-  /* 06 */
-  "401b4f982907a83104502c89e3ca1d1ea333f5f7ac7676f24ea1e0d023d62e2e",
-
-  /* 07 */
-  "a9d7c4e2f1b0837465d4c3b2a1908172635445566778899aabbccddeeff0011",
-
-  /* 08 */
-  "a711232c3825269143fe0cc1f9d1455bad00ed331e53319b3aab9d12d0ae456d",
-
-  /* 09 */
-  "4fc7807217e68b0b8bbf6f7a41ee0d2f9c7e4b1b8539e226172ae92bb00f9aed",
-
-  /* 10 */
-  "d4b8e1c7a2f9038567d4c3b2a1908172635445566778899aabbccddeeff0011",
-
-  /* 11 */
-  "2ed280d84ad145eddf613e7ee456006b2db75fe530af93c8de30ddc594cd56dd",
-
-  /* 12 */
-  "207ff8ff23c6df7080d5d52fde8bf4b57ae324b5295d4aad6f2350691c94097d",
-
-  /* 13 */
-  "2a7c9e4f1d8b60357483920172635445566778899aabbccddeeff0011223344"
-
-];
-
-
-/*
-   internal records
-*/
-
-const routes = {
-  a: [1, 4],
-  b: [3, 6, 11],
-  c: [8, 9, 12]
 };
 
 
-async function verify(value, route){
+/* Check an answer against a record */
+async function checkAnswer(input, record) {
 
-  const hash = await sha256(value);
+  const answer = normalize(input);
+  const answerHash = await hash(answer);
 
-  return routes[route].some(index => {
-    return fragments[index] === hash;
-  });
+  return records[record].includes(answerHash);
 }
 
 
-/* record 01 */
+/* RECORD 01 */
 
-async function check1(){
+async function check1() {
 
-  const value = norm($("a1").value);
+  const input = $("a1").value;
 
-  if(await verify(value, "a")){
+  if (await checkAnswer(input, "first")) {
 
     show("p2");
 
-  }else{
+  } else {
 
     $("e1").textContent =
-      "No. Something is still out of place.";
+      "No. The pieces are still out of order.";
 
   }
 }
 
 
-/* record 02 */
+/* RECORD 02 */
 
-async function check2(){
+async function check2() {
 
-  const value = norm($("a2").value);
+  const input = $("a2").value;
 
-  if(await verify(value, "b")){
+  if (await checkAnswer(input, "second")) {
 
     show("p3");
 
-  }else{
+  } else {
 
     $("e2").textContent =
-      "Eight were counted. Look at what wasn't.";
+      "Eight were counted. One was left behind.";
 
   }
 }
 
 
-/* record 03 */
+/* RECORD 03 */
 
-async function check3(){
+async function check3() {
 
-  const value = norm($("a3").value)
-    .replace(/\s+/g, "");
+  const input = $("a3").value.replace(/\s+/g, "");
 
-  if(await verify(value, "c")){
+  if (await checkAnswer(input, "final")) {
 
     show("final");
 
-  }else{
+  } else {
 
     $("e3").textContent =
-      "Three lines. Three numbers. Try again.";
+      "Three lines. Three numbers. Something is missing.";
 
   }
 }
 
 
-/* background archive check */
+/* ARCHIVE STATUS */
 
-(function(){
+(function archiveCheck() {
 
-  const recordCount = fragments.length;
+  const totalRecords =
+    Object.keys(records).length;
 
-  if(recordCount === 0){
+  if (totalRecords === 0) {
     document.body.dataset.archive = "empty";
   }
 
