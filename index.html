@@ -1,158 +1,89 @@
 <script>
-function $(id){
-  return document.getElementById(id);
-}
+function $(id){ return document.getElementById(id); }
 
 function show(id){
   document.querySelectorAll("section").forEach(s => s.classList.add("hidden"));
   $(id).classList.remove("hidden");
-  window.scrollTo(0,0);
+  window.scrollTo(0, 0);
 }
 
 function norm(s){
   return s.toLowerCase()
-    .replace(/[^a-z0-9,\/ -]/g,"")
-    .replace(/\s+/g," ")
+    .replace(/[^a-z0-9,\/ -]/g, "")
+    .replace(/\s+/g, " ")
     .trim();
 }
 
-async function sha256(str){
+// Utility function to compute SHA-256 string hash using standard Web Crypto API
+async function sha256(str) {
   const buf = await crypto.subtle.digest(
     "SHA-256",
     new TextEncoder().encode(str)
   );
 
   return Array.from(new Uint8Array(buf))
-    .map(b => b.toString(16).padStart(2,"0"))
-    .join("");
+    .map(b => b.toString(16).padStart(2, '0'))
+    .join('');
 }
-
-
-/* recovered fragments */
-
-const fragments = [
-
-  "91f6c6c5b8a9f5e7d1c4b3a2e8f7c6d5b4a3928172635445566778899aabbccdd",
-
-  "3fd424a72af0a4b47673f78a1b2c94f99eae709bf5625b036ab8f9cb8c2dc821",
-
-  "4f8e2c9a17b6d5e4c3a291807f6e5d4c3b2a1908172635445566778899aabbcc",
-
-  "8356b43f84d485037060c3fe4786f41d4b4b241278b8645bcce36753a8acfb46",
-
-  "35fb900176c8de8f0d69fd648c4b27d2798e37dd41d448fdb8efd1bd77ad9d8b",
-
-  "7c1e4a9b2d8f6c5e3b1a908172635445566778899aabbccddeeff001122334455",
-
-  "401b4f982907a83104502c89e3ca1d1ea333f5f7ac7676f24ea1e0d023d62e2e",
-
-  "a9d7c4e2f1b0837465d4c3b2a1908172635445566778899aabbccddeeff0011",
-
-  "a711232c3825269143fe0cc1f9d1455bad00ed331e53319b3aab9d12d0ae456d",
-
-  "4fc7807217e68b0b8bbf6f7a41ee0d2f9c7e4b1b8539e226172ae92bb00f9aed",
-
-  "d4b8e1c7a2f9038567d4c3b2a1908172635445566778899aabbccddeeff0011",
-
-  "2ed280d84ad145eddf613e7ee456006b2db75fe530af93c8de30ddc594cd56dd",
-
-  "207ff8ff23c6df7080d5d52fde8bf4b57ae324b5295d4aad6f2350691c94097d",
-
-  "2a7c9e4f1d8b60357483920172635445566778899aabbccddeeff0011223344"
-
-];
-
-
-/* internal index */
-
-const routes = {
-  p1: [1,4],
-  p2: [6,11,3],
-  p3: [8,9,12]
-};
-
-
-function resolve(list){
-  return list.map(i => fragments[i]);
-}
-
-
-async function verify(value, route){
-
-  const hash = await sha256(value);
-  const set = resolve(routes[route]);
-
-  return set.includes(hash);
-}
-
-
-/* record 01 */
 
 async function check1(){
+  const v = norm($("a1").value);
+  const hash = await sha256(v);
 
-  const value = norm($("a1").value);
+  // Hashes for:
+  // "the one inside the cord"
+  // "the one inside"
+  const validHashes = [
+    "e622b781cf267104719bb81062025ed9f335503ddcdbd1dfbb2541db0d12fefc",
+    "95c91104e1e3dd2d103ea29e34a6dfdf2d9aa5237ed78be1577dcd2b0d2a8b9e"
+  ];
 
-  if(await verify(value,"p1")){
-
+  if (validHashes.includes(hash)) {
     show("p2");
-
-  }else{
-
-    $("e1").textContent =
-      "No. Something is still out of place.";
-
+  } else {
+    $("e1").textContent = "No. Something is still out of place.";
   }
 }
-
-
-/* record 02 */
 
 async function check2(){
+  const v = norm($("a2").value);
+  const hash = await sha256(v);
 
-  const value = norm($("a2").value);
+  // Hashes for:
+  // "ninth"
+  // "the ninth"
+  // "the ninth witness"
+  const validHashes = [
+    "357f892fb68f946e917d84871d34e6f4234efd22964a092822ff9b1062c31154",
+    "c5e937d589886470fb4a72d4ce5e7b23393961bbecce9df713f019a16f5c5dc0",
+    "53d537a4e6727218684724a2592dae4efc3f15d966d6ed9a11dbba80509a2b66"
+  ];
 
-  if(await verify(value,"p2")){
-
+  if (validHashes.includes(hash)) {
     show("p3");
-
-  }else{
-
-    $("e2").textContent =
-      "Eight were counted. Look at what wasn't.";
-
+  } else {
+    $("e2").textContent = "Eight were counted. Look at what wasn't.";
   }
 }
-
-
-/* record 03 */
 
 async function check3(){
+  const v = norm($("a3").value).replace(/\s+/g, "");
+  const hash = await sha256(v);
 
-  const value = norm($("a3").value)
-    .replace(/\s+/g,"");
+  // Hashes for:
+  // "74237-1286"
+  // "742,37,-1286"
+  // "742/37/-1286"
+  const validHashes = [
+    "3d6f125a0a3a78f877fca99bb710376ce93821a812df0f65839b2cf41e6c3fa1",
+    "5d1e4ca52a4cd9a96e98b0a996bbef58a23072efd0246a47ce4e46db874ef72d",
+    "f29bfdca6b406e1ce021ab50b86aef15fb45a8df2d854ce6fa2aa8f921bcbc12"
+  ];
 
-  if(await verify(value,"p3")){
-
+  if (validHashes.includes(hash)) {
     show("final");
-
-  }else{
-
-    $("e3").textContent =
-      "Three lines. Three numbers. Try again.";
-
+  } else {
+    $("e3").textContent = "Three lines. Three numbers. Try again.";
   }
 }
-
-
-/* archive noise */
-
-(function(){
-
-  const fragments_seen = fragments.length;
-
-  if(fragments_seen < 1){
-    document.body.dataset.status = "empty";
-  }
-
-})();
 </script>
