@@ -1,472 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>ARCHIVE // RECOVERED</title>
-
-<style>
-    * {
-        box-sizing: border-box;
-    }
-
-    html {
-        background: #0b0b0b;
-    }
-
-    body {
-        margin: 0;
-        padding: 40px 20px;
-        background:
-            radial-gradient(circle at top, #151515 0%, #0b0b0b 55%);
-        color: #aaa;
-        font-family: "Courier New", monospace;
-        font-size: 15px;
-        line-height: 1.8;
-        min-height: 100vh;
-    }
-
-    main {
-        width: 100%;
-        max-width: 760px;
-        margin: auto;
-        padding: 35px 34px 70px;
-        border-left: 1px solid #292929;
-        border-right: 1px solid #292929;
-        background: rgba(10, 10, 10, 0.82);
-    }
-
-    section {
-        min-height: 80vh;
-    }
-
-    .hidden {
-        display: none;
-    }
-
-    .top-line {
-        border-top: 1px dashed #333;
-        margin-bottom: 30px;
-    }
-
-    .label {
-        display: inline-block;
-        border: 1px solid #383838;
-        padding: 3px 10px;
-        color: #777;
-        font-size: 12px;
-        letter-spacing: 1px;
-        margin-bottom: 20px;
-    }
-
-    h1 {
-        font-size: 22px;
-        font-weight: normal;
-        color: #aaa;
-        letter-spacing: 2px;
-        margin: 0 0 35px;
-    }
-
-    h2 {
-        font-size: 18px;
-        font-weight: normal;
-        color: #999;
-        letter-spacing: 2px;
-        margin: 25px 0 35px;
-    }
-
-    p {
-        margin: 0 0 32px;
-    }
-
-    .small {
-        color: #666;
-        font-size: 12px;
-    }
-
-    .dim {
-        color: #555;
-    }
-
-    .fragment {
-        border: 1px solid #303030;
-        padding: 22px;
-        margin: 25px 0 30px;
-        color: #aaa;
-        line-height: 3.2;
-        letter-spacing: 2px;
-    }
-
-    .fragment span {
-        display: block;
-    }
-
-    .note {
-        color: #777;
-        font-size: 13px;
-        margin-bottom: 12px;
-    }
-
-    input {
-        width: 100%;
-        height: 48px;
-        background: #090909;
-        border: 1px solid #363636;
-        color: #aaa;
-        padding: 0 14px;
-        font-family: "Courier New", monospace;
-        font-size: 15px;
-        outline: none;
-    }
-
-    input:focus {
-        border-color: #666;
-    }
-
-    button {
-        margin-top: 10px;
-        background: #101010;
-        border: 1px solid #444;
-        color: #999;
-        padding: 10px 18px;
-        font-family: "Courier New", monospace;
-        font-size: 14px;
-        cursor: pointer;
-    }
-
-    button:hover {
-        background: #181818;
-        color: #ccc;
-    }
-
-    .error {
-        min-height: 25px;
-        margin-top: 12px;
-        color: #666;
-        font-size: 13px;
-    }
-
-    .success {
-        color: #888;
-    }
-
-    .end {
-        margin-top: 80px;
-        border-top: 1px dashed #333;
-        padding-top: 25px;
-    }
-
-    .corrupt {
-        color: #555;
-        font-size: 11px;
-        letter-spacing: 1px;
-    }
-
-    @media (max-width: 600px) {
-        body {
-            padding: 20px 8px;
-        }
-
-        main {
-            padding: 25px 20px 50px;
-        }
-    }
-</style>
-</head>
-
-<body>
-
-<main>
-
-    <!-- ========================= -->
-    <!-- RECORD 01                 -->
-    <!-- ========================= -->
-
-    <section id="p1">
-
-        <div class="top-line"></div>
-
-        <div class="label">LOCAL COPY // recovered_09</div>
-
-        <h1>archive_09</h1>
-
-        <p class="small">
-            there is no official copy of this record.
-        </p>
-
-        <p class="small">
-            TRANSCRIPTION // 01
-        </p>
-
-        <h2>THE SIX</h2>
-
-        <p>
-            These were the words found in the book.
-        </p>
-
-        <div class="fragment">
-            <span>THE CORD</span>
-            <span>ONE</span>
-            <span>THE</span>
-            <span>IN</span>
-            <span>SIDE</span>
-        </div>
-
-        <p>
-            They were written like this.
-        </p>
-
-        <p>
-            I don't think they were meant to stay that way.
-        </p>
-
-        <p>
-            The order feels wrong.
-        </p>
-
-        <p>
-            Something about the spaces between them—
-        </p>
-
-        <p class="dim">
-            [record ends]
-        </p>
-
-        <div class="end">
-
-            <p class="small">
-                copy date: unknown // source integrity: 71%
-            </p>
-
-            <p class="small">
-                some records may be missing
-            </p>
-
-            <input
-                id="a1"
-                type="text"
-                autocomplete="off"
-                spellcheck="false"
-            >
-
-            <button onclick="check1()">try</button>
-
-            <div id="e1" class="error"></div>
-
-        </div>
-
-    </section>
-
-
-    <!-- ========================= -->
-    <!-- RECORD 02                 -->
-    <!-- ========================= -->
-
-    <section id="p2" class="hidden">
-
-        <div class="top-line"></div>
-
-        <div class="label">LOCAL COPY // recovered_09</div>
-
-        <h1>archive_09</h1>
-
-        <p class="small">
-            TRANSCRIPTION // 02
-        </p>
-
-        <h2>THE NINTH</h2>
-
-        <p>
-            The next page was damaged.
-        </p>
-
-        <p>
-            Only part of the note could be recovered.
-        </p>
-
-        <div class="fragment">
-            <span>8 were counted.</span>
-            <span>9 was not.</span>
-            <span>There should have been another.</span>
-        </div>
-
-        <p>
-            The name was written more than once.
-        </p>
-
-        <p>
-            Most of it was crossed out.
-        </p>
-
-        <p class="dim">
-            [illegible section]
-        </p>
-
-        <div class="end">
-
-            <p class="note">
-                something is missing from the count.
-            </p>
-
-            <input
-                id="a2"
-                type="text"
-                autocomplete="off"
-                spellcheck="false"
-            >
-
-            <button onclick="check2()">try</button>
-
-            <div id="e2" class="error"></div>
-
-        </div>
-
-    </section>
-
-
-    <!-- ========================= -->
-    <!-- RECORD 03                 -->
-    <!-- ========================= -->
-
-    <section id="p3" class="hidden">
-
-        <div class="top-line"></div>
-
-        <div class="label">CORRUPTED // 03</div>
-
-        <h1>THE LAST RECORD</h1>
-
-        <p>
-            Only three lines survived.
-        </p>
-
-        <p>
-            There was writing underneath them.
-            <br>
-            I couldn't make it out.
-        </p>
-
-        <p>
-            Maybe you can.
-        </p>
-
-        <div class="fragment">
-            <span>LZU</span>
-            <span>AHP</span>
-            <span>MZWW</span>
-        </div>
-
-        <p class="note">
-            The note beside it said:
-        </p>
-
-        <p>
-            "the key is where you started."
-        </p>
-
-        <div class="end">
-
-            <p class="small">
-                three numbers
-            </p>
-
-            <input
-                id="a3"
-                type="text"
-                autocomplete="off"
-                spellcheck="false"
-            >
-
-            <button onclick="check3()">try</button>
-
-            <div id="e3" class="error"></div>
-
-        </div>
-
-    </section>
-
-
-    <!-- ========================= -->
-    <!-- FINAL                     -->
-    <!-- ========================= -->
-
-    <section id="final" class="hidden">
-
-        <div class="top-line"></div>
-
-        <div class="label">RECOVERED // COMPLETE</div>
-
-        <h1>archive_09</h1>
-
-        <p>
-            The record opens.
-        </p>
-
-        <p>
-            For a moment, there is nothing.
-        </p>
-
-        <p class="dim">
-            Then another line appears.
-        </p>
-
-        <div class="fragment">
-            <span>YOU WERE NOT SUPPOSED</span>
-            <span>TO FIND THIS.</span>
-        </div>
-
-        <p>
-            [end of recovered material]
-        </p>
-
-        <div class="end">
-            <p class="corrupt">
-                archive status: unstable<br>
-                source integrity: unknown<br>
-                original copy: NOT FOUND
-            </p>
-        </div>
-
-    </section>
-
-</main>
-
-
+```html
 <script>
 
-/* =========================
-   BASIC PAGE FUNCTIONS
-   ========================= */
-
-function $(id) {
+function $(id){
     return document.getElementById(id);
 }
 
 
-function show(id) {
+function show(id){
 
-    document.querySelectorAll("section").forEach(section => {
-        section.classList.add("hidden");
+    document.querySelectorAll("section").forEach(s => {
+        s.classList.add("hidden");
     });
 
     const target = $(id);
 
-    if (target) {
+    if(target){
         target.classList.remove("hidden");
         window.scrollTo(0, 0);
     }
 }
 
 
-/* =========================
-   INPUT CLEANING
-   ========================= */
+function norm(s){
 
-function normalize(text) {
-
-    return text
-        .toLowerCase()
+    return s.toLowerCase()
         .replace(/[^a-z0-9,\/ -]/g, "")
         .replace(/\s+/g, " ")
         .trim();
@@ -474,83 +31,114 @@ function normalize(text) {
 }
 
 
-/* =========================
-   SHA-256
-   ========================= */
+async function sha256(str){
 
-async function hash(text) {
-
-    const data = new TextEncoder().encode(text);
-
-    const result = await crypto.subtle.digest(
+    const buffer = await crypto.subtle.digest(
         "SHA-256",
-        data
+        new TextEncoder().encode(str)
     );
 
-    return Array.from(new Uint8Array(result))
-        .map(byte => byte.toString(16).padStart(2, "0"))
+    return Array.from(new Uint8Array(buffer))
+        .map(b => b.toString(16).padStart(2, "0"))
         .join("");
 
 }
 
 
-/* =========================
-   HIDDEN ANSWERS
-   ========================= */
+/*
+   recovered data
+   some fragments are incomplete
+*/
 
-const records = {
+const fragments = [
 
-    first: [
-        "3fd424a72af0a4b47673f78a1b2c94f99eae709bf5625b036ab8f9cb8c2dc821",
-        "35fb900176c8de8f0d69fd648c4b27d2798e37dd41d448fdb8efd1bd77ad9d8b"
-    ],
+    /* 00 */
+    "91f6c6c5b8a9f5e7d1c4b3a2e8f7c6d5b4a3928172635445566778899aabbccdd",
 
-    second: [
-        "8356b43f84d485037060c3fe4786f41d4b4b241278b8645bcce36753a8acfb46",
-        "401b4f982907a83104502c89e3ca1d1ea333f5f7ac7676f24ea1e0d023d62e2e",
-        "2ed280d84ad145eddf613e7ee456006b2db75fe530af93c8de30ddc594cd56dd"
-    ],
+    /* 01 */
+    "3fd424a72af0a4b47673f78a1b2c94f99eae709bf5625b036ab8f9cb8c2dc821",
 
-    final: [
-        "a711232c3825269143fe0cc1f9d1455bad00ed331e53319b3aab9d12d0ae456d",
-        "207ff8ff23c6df7080d5d52fde8bf4b57ae324b5295d4aad6f2350691c94097d",
-        "4fc7807217e68b0b8bbf6f7a41ee0d2f9c7e4b1b8539e226172ae92bb00f9aed"
-    ]
+    /* 02 */
+    "4f8e2c9a17b6d5e4c3a291807f6e5d4c3b2a1908172635445566778899aabbcc",
+
+    /* 03 */
+    "8356b43f84d485037060c3fe4786f41d4b4b241278b8645bcce36753a8acfb46",
+
+    /* 04 */
+    "35fb900176c8de8f0d69fd648c4b27d2798e37dd41d448fdb8efd1bd77ad9d8b",
+
+    /* 05 */
+    "7c1e4a9b2d8f6c5e3b1a908172635445566778899aabbccddeeff001122334455",
+
+    /* 06 */
+    "401b4f982907a83104502c89e3ca1d1ea333f5f7ac7676f24ea1e0d023d62e2e",
+
+    /* 07 */
+    "a9d7c4e2f1b0837465d4c3b2a1908172635445566778899aabbccddeeff0011",
+
+    /* 08 */
+    "a711232c3825269143fe0cc1f9d1455bad00ed331e53319b3aab9d12d0ae456d",
+
+    /* 09 */
+    "4fc7807217e68b0b8bbf6f7a41ee0d2f9c7e4b1b8539e226172ae92bb00f9aed",
+
+    /* 10 */
+    "d4b8e1c7a2f9038567d4c3b2a1908172635445566778899aabbccddeeff0011",
+
+    /* 11 */
+    "2ed280d84ad145eddf613e7ee456006b2db75fe530af93c8de30ddc594cd56dd",
+
+    /* 12 */
+    "207ff8ff23c6df7080d5d52fde8bf4b57ae324b5295d4aad6f2350691c94097d",
+
+    /* 13 */
+    "2a7c9e4f1d8b60357483920172635445566778899aabbccddeeff0011223344"
+
+];
+
+
+/*
+   internal records
+*/
+
+const routes = {
+
+    a: [1, 4],
+
+    b: [3, 6, 11],
+
+    c: [8, 9, 12]
 
 };
 
 
-/* =========================
-   ANSWER CHECKER
-   ========================= */
+async function verify(value, route){
 
-async function checkAnswer(input, record) {
+    const hash = await sha256(value);
 
-    const value = normalize(input);
-
-    const valueHash = await hash(value);
-
-    return records[record].includes(valueHash);
+    return routes[route].some(index => {
+        return fragments[index] === hash;
+    });
 
 }
 
 
 /* =========================
-   PUZZLE 01
+   RECORD 01
    ========================= */
 
-async function check1() {
+async function check1(){
 
-    const input = $("a1").value;
+    const value = norm($("a1").value);
 
-    if (await checkAnswer(input, "first")) {
+    if(await verify(value, "a")){
 
         show("p2");
 
-    } else {
+    }else{
 
         $("e1").textContent =
-            "No. The order still feels wrong.";
+            "No. Something is still out of place.";
 
     }
 
@@ -558,21 +146,21 @@ async function check1() {
 
 
 /* =========================
-   PUZZLE 02
+   RECORD 02
    ========================= */
 
-async function check2() {
+async function check2(){
 
-    const input = $("a2").value;
+    const value = norm($("a2").value);
 
-    if (await checkAnswer(input, "second")) {
+    if(await verify(value, "b")){
 
         show("p3");
 
-    } else {
+    }else{
 
         $("e2").textContent =
-            "Eight were counted. One was left behind.";
+            "Eight were counted. Look at what wasn't.";
 
     }
 
@@ -580,27 +168,43 @@ async function check2() {
 
 
 /* =========================
-   PUZZLE 03
+   RECORD 03
    ========================= */
 
-async function check3() {
+async function check3(){
 
-    const input = $("a3").value;
+    const value = norm($("a3").value)
+        .replace(/\s+/g, "");
 
-    if (await checkAnswer(input, "final")) {
+    if(await verify(value, "c")){
 
         show("final");
 
-    } else {
+    }else{
 
         $("e3").textContent =
-            "Three lines. Three numbers. Something is missing.";
+            "Three lines. Three numbers. Try again.";
 
     }
 
 }
 
-</script>
 
-</body>
-</html>
+/* =========================
+   BACKGROUND ARCHIVE CHECK
+   ========================= */
+
+(function(){
+
+    const recordCount = fragments.length;
+
+    if(recordCount === 0){
+
+        document.body.dataset.archive = "empty";
+
+    }
+
+})();
+
+</script>
+```
