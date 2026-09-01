@@ -1,14 +1,174 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Test</title>
-</head>
+<script>
+function $(id) {
+  return document.getElementById(id);
+}
 
-<body style="background:#111; color:#aaa; font-family:monospace; padding:40px;">
+function show(id) {
+  document.querySelectorAll("section").forEach(section => {
+    section.classList.add("hidden");
+  });
 
-    <h1>ARCHIVE TEST</h1>
+  const target = $(id);
 
-    <p>If you can see this, the website is working.</p>
+  if (target) {
+    target.classList.remove("hidden");
+    window.scrollTo(0, 0);
+  }
+}
 
-</body>
-</html>
+
+/* Clean up player input */
+function normalize(text) {
+  return text
+    .toLowerCase()
+    .replace(/[^a-z0-9,\/ -]/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+
+/* Convert answer into a SHA-256 hash */
+async function hash(text) {
+  const data = new TextEncoder().encode(text);
+  const result = await crypto.subtle.digest("SHA-256", data);
+
+  return Array.from(new Uint8Array(result))
+    .map(byte => byte.toString(16).padStart(2, "0"))
+    .join("");
+}
+
+
+/*
+    LOCAL COPY // recovered_09
+
+    there is no official copy of this record.
+
+    TRANSCRIPTION // 01
+
+    THE SIX
+
+    These were the words found in the book.
+
+    THE CORD
+    ONE
+    THE
+    IN
+    SIDE
+
+    They were written like this.
+
+    I don't think they were meant to stay that way.
+
+    The order feels wrong.
+
+    Something about the spaces between them—
+
+    [record ends]
+
+    copy date: unknown
+    source integrity: 71%
+    some records may be missing
+*/
+
+
+const records = {
+
+  first: [
+    "3fd424a72af0a4b47673f78a1b2c94f99eae709bf5625b036ab8f9cb8c2dc821",
+    "35fb900176c8de8f0d69fd648c4b27d2798e37dd41d448fdb8efd1bd77ad9d8b"
+  ],
+
+  second: [
+    "8356b43f84d485037060c3fe4786f41d4b4b241278b8645bcce36753a8acfb46",
+    "401b4f982907a83104502c89e3ca1d1ea333f5f7ac7676f24ea1e0d023d62e2e",
+    "2ed280d84ad145eddf613e7ee456006b2db75fe530af93c8de30ddc594cd56dd"
+  ],
+
+  final: [
+    "a711232c3825269143fe0cc1f9d1455bad00ed331e53319b3aab9d12d0ae456d",
+    "4fc7807217e68b0b8bbf6f7a41ee0d2f9c7e4b1b8539e226172ae92bb00f9aed",
+    "207ff8ff23c6df7080d5d52fde8bf4b57ae324b5295d4aad6f2350691c94097d"
+  ]
+
+};
+
+
+/* Check an answer */
+async function checkAnswer(input, record) {
+
+  const answer = normalize(input);
+  const answerHash = await hash(answer);
+
+  return records[record].includes(answerHash);
+}
+
+
+/* RECORD 01 */
+
+async function check1() {
+
+  const input = $("a1").value;
+
+  if (await checkAnswer(input, "first")) {
+
+    show("p2");
+
+  } else {
+
+    $("e1").textContent =
+      "No. The order still feels wrong.";
+
+  }
+}
+
+
+/* RECORD 02 */
+
+async function check2() {
+
+  const input = $("a2").value;
+
+  if (await checkAnswer(input, "second")) {
+
+    show("p3");
+
+  } else {
+
+    $("e2").textContent =
+      "Eight were counted. One was left behind.";
+
+  }
+}
+
+
+/* RECORD 03 */
+
+async function check3() {
+
+  const input = $("a3").value.replace(/\s+/g, "");
+
+  if (await checkAnswer(input, "final")) {
+
+    show("final");
+
+  } else {
+
+    $("e3").textContent =
+      "Three lines. Three numbers. Something is missing.";
+
+  }
+}
+
+
+/* ARCHIVE STATUS */
+
+(function archiveCheck() {
+
+  const totalRecords = Object.keys(records).length;
+
+  if (totalRecords === 0) {
+    document.body.dataset.archive = "empty";
+  }
+
+})();
+</script>
