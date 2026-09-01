@@ -101,6 +101,17 @@ p {
     display: block;
 }
 
+.cipher {
+    white-space: pre-line;
+    font-family: "Courier New", monospace;
+    border: 1px solid #303030;
+    padding: 22px;
+    margin: 25px 0 30px;
+    color: #aaa;
+    line-height: 2.2;
+    letter-spacing: 2px;
+}
+
 .note {
     color: #777;
     font-size: 13px;
@@ -179,7 +190,9 @@ button:hover {
 
 <main>
 
-<!-- STARTING PAGE -->
+<!-- ========================= -->
+<!-- STARTING PAGE             -->
+<!-- ========================= -->
 
 <section id="start">
 
@@ -239,7 +252,9 @@ button:hover {
 </section>
 
 
-<!-- RECORD 01 -->
+<!-- ========================= -->
+<!-- RECORD 01                 -->
+<!-- ========================= -->
 
 <section id="p1" class="hidden">
 
@@ -301,7 +316,12 @@ button:hover {
             some records may be missing
         </p>
 
-        <input id="a1" type="text" autocomplete="off" spellcheck="false">
+        <input
+            id="a1"
+            type="text"
+            autocomplete="off"
+            spellcheck="false"
+        >
 
         <button onclick="check1()">try</button>
 
@@ -312,7 +332,9 @@ button:hover {
 </section>
 
 
-<!-- RECORD 02 -->
+<!-- ========================= -->
+<!-- RECORD 02                 -->
+<!-- ========================= -->
 
 <section id="p2" class="hidden">
 
@@ -329,38 +351,75 @@ button:hover {
     <h2>THE NINTH</h2>
 
     <p>
-        The next page was damaged.
+        The page was folded when I found it.
     </p>
 
     <p>
-        Only part of the note could be recovered.
+        Someone had written over the original note.
     </p>
 
-    <div class="fragment">
-        <span>8 were counted.</span>
-        <span>9 was not.</span>
-        <span>There should have been another.</span>
+    <div class="cipher">
+REC. 09 / 02
+COPY 03
+PAGE 17
     </div>
 
     <p>
-        The name was written more than once.
+        Most of the writing underneath is gone.
     </p>
 
     <p>
-        Most of it was crossed out.
+        What I could recover:
+    </p>
+
+    <div class="cipher">
+14  09  20  08
+_5  09  _20
+19  05  _14
+    </div>
+
+    <p>
+        There's a line underneath it.
+    </p>
+
+    <div class="cipher">
+01 = A
+02 = B
+03 = C
+...
+    </div>
+
+    <p class="dim">
+        The rest of the page is blank.
     </p>
 
     <p class="dim">
-        [illegible section]
+        Except for this:
+    </p>
+
+    <div class="cipher">
+          9
+          |
+          |
+        [ ]
+    </div>
+
+    <p class="dim">
+        [END OF TRANSCRIPTION]
     </p>
 
     <div class="end">
 
         <p class="note">
-            something is missing from the count.
+            enter what you found.
         </p>
 
-        <input id="a2" type="text" autocomplete="off" spellcheck="false">
+        <input
+            id="a2"
+            type="text"
+            autocomplete="off"
+            spellcheck="false"
+        >
 
         <button onclick="check2()">try</button>
 
@@ -371,7 +430,9 @@ button:hover {
 </section>
 
 
-<!-- RECORD 03 -->
+<!-- ========================= -->
+<!-- RECORD 03                 -->
+<!-- ========================= -->
 
 <section id="p3" class="hidden">
 
@@ -415,7 +476,12 @@ button:hover {
             three numbers
         </p>
 
-        <input id="a3" type="text" autocomplete="off" spellcheck="false">
+        <input
+            id="a3"
+            type="text"
+            autocomplete="off"
+            spellcheck="false"
+        >
 
         <button onclick="check3()">try</button>
 
@@ -426,7 +492,9 @@ button:hover {
 </section>
 
 
-<!-- FINAL -->
+<!-- ========================= -->
+<!-- FINAL                     -->
+<!-- ========================= -->
 
 <section id="final" class="hidden">
 
